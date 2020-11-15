@@ -14,7 +14,9 @@
     />
   </svg>
 </template>
+<script>
 
+</script>
 <style>
 .NuxtLogo {
   animation: 1s appear;
