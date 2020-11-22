@@ -40,9 +40,11 @@
                 
         </div>
         <div class="eshop-header-status">
-                <span>登录</span>
+                <nuxt-link to="/login">登录</nuxt-link>
+                <!-- <span>登录</span> -->
                 <span class='eshop-header-status-seperator'></span>
-                <span>注册</span>
+                <nuxt-link to="/register">注册</nuxt-link>
+                <!-- <span>注册</span> -->
         </div>
         <div class="eshop-header-cart">
                 <a-icon :style="{fontSize:'22px',color:'grey'}" type="shopping-cart" />
@@ -83,12 +85,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@eshop-header-height:68px;
-@eshop-header-width:1140px;
-@eshop-header-link-padding:0 28px;
+
 .eshop-header{
+    width: 100vw;
     height: @eshop-header-height;
     line-height:@eshop-header-height;
+    position: fixed;
+    top:0;
+    z-index: 999;
+    background-color: #fff;
     &-logo{
         padding:16px;
     }

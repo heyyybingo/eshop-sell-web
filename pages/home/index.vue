@@ -20,7 +20,7 @@
             <h3>副标题</h3>
         </div>
 
-        <Activity/>
+        <Activity :imgs="[]"/>
       </div>
 
       <div class="eshop-home-recommend">
@@ -39,7 +39,7 @@
         
       </div>
       <div class="eshop-home-brand">
-
+        <Activity :imgs="[0,1,2,3]"/>
       </div>
 
     </div>
@@ -70,7 +70,7 @@ export default {
 <style lang="less" >
 .eshop-home{
   width:100%;
-
+  margin-top:@eshop-header-height;
 
   &-carousel{
     // height:100%;
@@ -89,7 +89,7 @@ export default {
     }
   }
   &-main{
-    max-width: 1440px;
+    max-width: @eshop-max-content;
     margin:0 auto;
 
     

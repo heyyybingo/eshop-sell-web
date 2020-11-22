@@ -37,6 +37,7 @@ export default {
       flex-wrap: wrap;
     }
     .eshop-brand-col{
+        height:310px;
         &:not(:nth-child(5n)){
           margin-right: 16px;
         }

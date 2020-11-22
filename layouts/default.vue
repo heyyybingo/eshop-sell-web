@@ -11,9 +11,24 @@ export default {
   components: {
     Header
   },
+
+  watch:{
+      // $route:function(to,from){
+      //     console.log("router changed")
+      //     console.log(to)
+      //     let body=document.getElementsByTagName("body")[0]
+      //     if(to.fullPath!=="home"){
+      //       body.classList.contains("")
+      //       body.classList.add("")
+      //     }
+      // }
+  }
 }
 </script>
 <style>
+html,body{
+  height:auto;
+}
 html {
   font-family:
     'Source Sans Pro',
