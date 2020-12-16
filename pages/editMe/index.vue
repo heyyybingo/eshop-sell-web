@@ -8,7 +8,7 @@
           </div>
           <a-form-model :style="{width:'80%'}">
             
-            <h3>注册</h3>
+            <h3>编辑</h3>
             <a-form-model-item>
               <a-input></a-input>
             </a-form-model-item>
@@ -42,7 +42,7 @@
               </div>
             </a-form-model-item> -->
             <a-form-model-item>
-              <a-button :style="{width:'100%'}" type="primary">注册</a-button>
+              <a-button :style="{width:'100%'}" type="primary">确认</a-button>
               <!-- <a-button :style="{width:'100%'}">用短信登录</a-button> -->
             </a-form-model-item>
 
@@ -81,6 +81,7 @@ export default {
     
     &-content{
       background-color: #fff;
+      
       width:20%;
       height:70%;
       display: flex;

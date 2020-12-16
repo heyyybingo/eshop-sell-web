@@ -1,5 +1,8 @@
 <template>
-  <section>Hello</section>
+  <div class="eshop-product">
+    
+
+  </div>
 </template>
 
 <script>
