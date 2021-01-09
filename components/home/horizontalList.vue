@@ -5,12 +5,12 @@
       </div>
         <div class="eshop-horizontalList-content">
              <div  :style="{marginLeft:`calc(${-pos} * 100%)`}" class="eshop-horizontalList-content-container">
-                <div :key="index" v-for="(item,index) in list" class="eshop-horizontalList-item">
-                   <Product width="100%"/>
+                <div :key="item.id" v-for="(item) in productList" class="eshop-horizontalList-item">
+                   <Product :img="getAvatar(item.product)" :product="item.product" width="100%"/>
                 </div>
             </div>
         </div>
-      <div @click="pos<Math.ceil(list.length/4)-1?pos=pos+1:pos=0" class="eshop-horizontalList-right">
+      <div @click="pos<Math.ceil(productList.length/4)-1?pos=pos+1:pos=0" class="eshop-horizontalList-right">
           <a-icon type="right" />
       </div>
   </div>
@@ -20,6 +20,7 @@
 import Product from '~/components/generalComp/product.vue'
 export default {
   name: 'Hello',
+  props:['productList'],
   data() {
     return {
         pos:0,
@@ -29,7 +30,18 @@ export default {
   computed: {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+      getAvatar:function(product){
+          console.log("HOR",product)
+           if(!product){
+              return ''
+          }
+          if(!product.slideshow){
+              return ''
+          }
+          return product.slideshow.avatar
+      }
+  },
   components: {
       Product
   },
