@@ -5,7 +5,7 @@
              <img src="~/assets/images/logo.png" />
          </div>
           <div class="eshop-header-menu">
-              <a-menu v-model="current" mode="horizontal">
+              <a-menu :selectedKeys="current" @click="changeMenu" mode="horizontal">
                 <a-menu-item key="/allTypes">
                     查看所有类别
                 </a-menu-item>
@@ -39,15 +39,28 @@
                 </a-input>
                 
         </div>
-        <div class="eshop-header-status">
+        <div v-if="!loginStatus" class="eshop-header-status">
                 <nuxt-link to="/login">登录</nuxt-link>
                 <!-- <span>登录</span> -->
                 <span class='eshop-header-status-seperator'></span>
                 <nuxt-link to="/register">注册</nuxt-link>
                 <!-- <span>注册</span> -->
         </div>
-        <div class="eshop-header-cart">
+        
+        <div v-if="loginStatus" class="eshop-header-cart">
+            <a-badge @click="$router.push('/cart')" :count="cartTotal">
+                <a-icon slot="count" type="clock-circle" style="color: #f5222d" />
                 <a-icon :style="{fontSize:'22px',color:'grey'}" type="shopping-cart" />
+            </a-badge>
+        </div>
+        <div v-if="loginStatus" class="eshop-header-cart">
+            <nuxt-link to="/me">
+                <a-icon :style="{fontSize:'22px'}" type="user" />
+                个人中心
+            </nuxt-link>
+        </div>
+        <div v-if="loginStatus" class="eshop-header-cart">
+            <span @click="quit">退出</span>
         </div>
      </div>
   </div>
@@ -56,25 +69,39 @@
 <script>
 export default {
   name: 'Hello',
+  props:['cartTotal','loginStatus'],
   data() {
     return {
-        current:[]
+        // current:[]
     };
   },
-  computed: {},
+  computed: {
+      current:function(){
+          return [this.$route.fullPath]
+      }
+  },
   created() {
     //  console.log(this.$route.fullPath)
-     this.current=[this.$route.fullPath]
+    //  this.current=[this.$route.fullPath]
   },
   mounted() {},
-  methods: {},
-  watch:{
-      current:function(newPath,oldPath){
-          //console.log(oldPath,newPath)
-          const path=newPath[0];
-          console.log("current changed")
-          this.$router.push(path)
+  methods: {
+      quit:function(){
+          this.$store.dispatch('user/clearUserInfo')
+          this.$router.push('/login')
       },
+      changeMenu:function({ item, key, keyPath }){
+          console.log(key)
+          this.$router.push(key)
+      }
+  },
+  watch:{
+    //   current:function(newPath,oldPath){
+    //       //console.log(oldPath,newPath)
+    //       const path=newPath[0];
+    //       console.log("current changed")
+    //       this.$router.push(path)
+    //   },
     //   $route:function(to,from){
     //       console.log("router changed")
     //       this.current=[to.fullPath]
@@ -105,7 +132,7 @@ export default {
         align-items: center;
     }
     &-search{
-        width:300px;
+        width:200px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -124,6 +151,7 @@ export default {
     &-cart{
         width:100px;
         text-align: center;
+        cursor: pointer;
     }
     .ant-menu{
         border:none;

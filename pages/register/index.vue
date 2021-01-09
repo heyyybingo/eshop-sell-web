@@ -6,33 +6,33 @@
                 <a-icon type="arrow-left" />
                 返回</nuxt-link>
           </div>
-          <a-form-model :style="{width:'80%'}">
+          <a-form-model ref="registerForm" :rules="rules"  :model="form" :style="{width:'80%'}">
             
             <h3>注册</h3>
-            <a-form-model-item>
-              <a-input></a-input>
+            <a-form-model-item label="账号" prop="userName">
+              <a-input v-model="form.userName"></a-input>
             </a-form-model-item>
 
-            <a-form-model-item>
-              <a-input></a-input>
+            <a-form-model-item label="密码" prop="password">
+              <a-input  v-model="form.password"></a-input>
             </a-form-model-item>
             
-            <a-form-model-item>
-              <a-input></a-input>
+            <a-form-model-item label="姓名" prop="accountName">
+              <a-input  v-model="form.accountName"></a-input>
             </a-form-model-item>
             
 
-            <a-form-model-item>
-              <a-input></a-input>
+            <a-form-model-item label="电话">
+              <a-input v-model="form.phone"></a-input>
             </a-form-model-item>
 
-            <a-form-model-item>
-              <a-input></a-input>
+            <a-form-model-item label="邮箱">
+              <a-input v-model="form.mail"></a-input>
             </a-form-model-item>
 
-            <a-form-model-item>
+            <!-- <a-form-model-item label="邮箱">
               <a-input></a-input>
-            </a-form-model-item>
+            </a-form-model-item> -->
             <!-- <a-form-model-item>
                 
               <div class="eshop-register-account">
@@ -42,7 +42,7 @@
               </div>
             </a-form-model-item> -->
             <a-form-model-item>
-              <a-button :style="{width:'100%'}" type="primary">注册</a-button>
+              <a-button @click="register" :style="{width:'100%'}" type="primary">注册</a-button>
               <!-- <a-button :style="{width:'100%'}">用短信登录</a-button> -->
             </a-form-model-item>
 
@@ -58,12 +58,53 @@
 export default {
   name: 'Hello',
   data() {
-    return {};
+    return {
+        form:{
+          accountName:'',
+          password:'',
+          userName:'',
+          phone:'',
+          mail:''
+        },
+        rules: {
+        accountName:[
+          { required: true, message: '请输入姓名'},
+        ],
+        userName: [
+          { required: true, message: '请输入账号'},
+        ],
+        password:[
+          { required: true, message: '请输入密码'},
+        ],
+      },
+    };
   },
   computed: {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    register:async function(){
+      try{
+        let valid=await this.$refs.registerForm.validate();
+        const form=this.form;
+        let payload={
+          accountname:form.accountName,
+          password:form.password,
+          username:form.userName,
+          phone:form.phone,
+          mail:form.mail,
+          avatar:null
+        }
+        let res= await this.$axios.post("/user/registered",payload)
+        if(res){   
+           this.$message.success('注册成功');
+           this.$router.push('/login')
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
+  },
   components: {},
 };
 </script>

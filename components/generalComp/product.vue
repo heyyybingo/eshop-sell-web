@@ -1,27 +1,39 @@
 <template>
-    <div :style="{width}" class="eshop-product">
+    <div @click="$emit('click')" :style="{width}" class="eshop-product">
         <div class="eshop-product-img">
-            <img src="~/assets/images/other/img23.png"/>
+            <img :src="img?img:normal"/>
         </div>
-        <div class="eshop-product-name">"这是商品“</div>
+        <div class="eshop-product-name">{{product.name}}</div>
 
         <div class="eshop-product-mask">
-            <a-button type="primary">查看详情</a-button>
+            <a-button type="primary" @click="toProduct(product.id)">查看详情</a-button>
         </div>
     </div>
 </template>
 
 <script>
+import normal from '~/assets/images/other/img23.png'
 export default {
-  props:['width'],
+  props:['width','product','img'],
   name: 'Hello',
   data() {
-    return {};
+    return {
+        normal
+    };
   },
   computed: {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+      toProduct:function(id){
+          this.$router.push({
+              path:'/product',
+              query:{
+                  id
+              }
+          })
+      }
+  },
   components: {},
 };
 </script>

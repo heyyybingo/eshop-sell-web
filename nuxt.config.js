@@ -22,7 +22,10 @@ export default {
   },
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/antd-ui'
+    '@/plugins/antd-ui',
+    '~/plugins/axios.js',
+    '~/plugins/router.js',
+    { src: '~/plugins/localStorage.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -35,7 +38,17 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
+  proxy: {
+    '/api': {
+      target: 'http://101.201.69.221:9090',
+      pathRewrite: {
+        '^/api' : '/'
+        }
+      }
+  },
   router: {
     prefetchLinks: false
   },
@@ -48,5 +61,9 @@ export default {
         }
       }
     }
-  }
+  },
+  generate: {
+    devtools:true
+  },
+
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Header/>
+    <Header :cartTotal="cartTotal" :loginStatus="loginStatus"/>
     <Nuxt />
   </div>
 </template>
@@ -11,8 +11,34 @@ export default {
   components: {
     Header
   },
+  computed:{
+    cartTotal:function(){
+      return this.$store.state.cart.total
+    },
+    loginStatus:function(){
+      return this.$store.state.user.loginStatus
+    },
+    userId:function(){
+      return this.$store.state.user.userInfo?.id
+    }
+  },
+  created(){
+    console.log(this.loginStatus)
+  },
+  updated(){
 
+  },
   watch:{
+      userId:{
+        
+      handler:function(newVal,oldVal){
+        if(newVal){
+          this.$store.dispatch('cart/fetchCartData',{userId:newVal});
+        }
+      },
+ 
+      immediate:true   
+       } 
       // $route:function(to,from){
       //     console.log("router changed")
       //     console.log(to)

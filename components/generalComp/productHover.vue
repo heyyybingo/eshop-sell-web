@@ -1,21 +1,39 @@
 <template>
-  <div class="eshop-productHover">
-      <div class="eshop-productHover-img">
-          <img src="~/assets/images/other/img33.jpg"/>
-      </div>
-  </div>
+    
+        <div class="eshop-productHover" @click="toProduct">
+            <div class="eshop-productHover-img" >
+                <img :src="img?img:normal"/>
+            </div>
+        </div>
+   
 </template>
 
 <script>
+import normal from '~/assets/images/other/img33.jpg'
 export default {
   name: 'Hello',
+  props:['img','productId'],
   data() {
-    return {};
+    return {
+        normal
+    };
   },
   computed: {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+      toProduct:function(){
+          console.log(this.productId)
+          if(this.productId){
+              this.$router.push({
+              path:'/product',
+              query:{
+                  id:this.productId
+              }
+          })
+          }
+      }
+  },
   components: {},
 };
 </script>
@@ -45,14 +63,15 @@ export default {
     }
     
     &:hover{
-        &::before{
+         &::before{
 
-            transform: scale(0.95);
-            border:3px solid white;
-            z-index: 100;
-        }
+                transform: scale(0.95);
+                border:3px solid white;
+                z-index: 100;
+            }
         .eshop-productHover-img{
              transform: scale(1.1);
+            
         }
     }
     
