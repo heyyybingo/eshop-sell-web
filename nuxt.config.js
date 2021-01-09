@@ -3,10 +3,13 @@ const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
     ? {
         router: {
-          base: '/eshop-sell-web/'
+          base: '/eshop-sell-web/',
+          prefetchLinks: false
         }
       }
-    : {}
+    : {
+      prefetchLinks: false
+    }
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   ...routerBase,
@@ -58,9 +61,9 @@ export default {
         }
       }
   },
-  router: {
-    prefetchLinks: false
-  },
+  // router: {
+    
+  // },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     loaders: {
