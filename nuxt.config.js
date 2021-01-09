@@ -13,6 +13,10 @@ const routerBase =
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   ...routerBase,
+  // router: {
+  //   base: '/eshop-sell-web/',
+  //   prefetchLinks: false
+  // },
   head: {
     title: 'eshop-sell-web',
     meta: [
