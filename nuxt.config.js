@@ -57,6 +57,9 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy'
   ],
+  axios: {
+    proxy: true
+  },
   proxy: {
     '/api': {
       target: 'http://120.79.1.207:9090',
